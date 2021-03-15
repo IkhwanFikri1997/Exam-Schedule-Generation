@@ -3,6 +3,7 @@ import json
 from schedule import *
 import wx.grid as grid
 import wx.adv as adv
+import os
 
 timechoice = ["0:00","1:00","2:00","3:00","4:00","5:00","6:00","7:00","8:00","9:00","10:00","11:00","12:00","13:00","14:00","15:00","16:00","17:00","18:00","19:00","20:00","21:00","22:00","23:00"]
 
@@ -237,6 +238,30 @@ class PresetDialog(wx.Dialog):
 
     def ExecPre3(self, event):
         self.chose = "Pre3"
+        self.Destroy()
+
+class ResultDialog(wx.Dialog):
+
+    def __init__(self, *args, **kw):
+        super(ResultDialog, self).__init__(*args, **kw)
+
+        self.initUI()
+        self.SetSize(550,150)
+        self.SetTitle("The Schedule has been made")
+    
+    def initUI(self):
+
+        pnl = wx.Panel(self)
+        text31 = 'Your Schedule has been Generated'
+        text32 = 'Your Schedule already saved as an excel file and placed inside the same folder'
+        font2 = wx.Font(10, wx.DEFAULT, wx.NORMAL, wx.NORMAL)
+        wx.StaticText(self, -1, text31, (20, 10)).SetFont(font2)
+        wx.StaticText(self, -1, text32, (20, 40)).SetFont(font2)
+        self.set1 = wx.Button(self, -1, "Exit", (150,70))
+
+        self.set1.Bind(wx.EVT_BUTTON, self.exitProg)
+
+    def exitProg(self, event):
         self.Destroy()
 
 class Program(wx.Frame):
@@ -483,6 +508,11 @@ class Program(wx.Frame):
             MakeHourlySchedule(STSinput,STEinput,MTSinput,MTEinput,TTSinput,TTEinput,WTSinput,WTEinput,ThTSinput,ThTEinput,FTSinput,FTEinput,SaTSinput,SaTEinput,Lessons)
         if(choice11 == True & choice22 == True):
             MakeDetailedSchedule(STSinput,STEinput,MTSinput,MTEinput,TTSinput,TTEinput,WTSinput,WTEinput,ThTSinput,ThTEinput,FTSinput,FTEinput,SaTSinput,SaTEinput,Lessons)
+        Rdialog = ResultDialog(None, title="The Schedule has been made")
+        Rdialog.ShowModal()
+        Rdialog.Destroy()
+        self.Close()
+        os.system('start Exam_Revision_Schedule.xlsx')
 
     def SavePreset(self, Presetname):
         Presetinp = {
