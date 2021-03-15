@@ -3,6 +3,7 @@ import json
 from schedule import *
 import wx.grid as grid
 import wx.adv as adv
+import os
 
 timechoice = ["0:00","1:00","2:00","3:00","4:00","5:00","6:00","7:00","8:00","9:00","10:00","11:00","12:00","13:00","14:00","15:00","16:00","17:00","18:00","19:00","20:00","21:00","22:00","23:00"]
 
@@ -37,7 +38,8 @@ class second_panel(wx.Panel):
         self.SleepTimeStart = wx.ComboBox(self, pos=(20, 75), choices=timechoice, style=wx.CB_READONLY)
         self.SleepTimeEnd = wx.ComboBox(self, pos=(80, 75), choices=timechoice, style=wx.CB_READONLY)
 
-        self.btn = wx.Button(self, -1, "Next", (300, 400))
+        self.btn1 = wx.Button(self, -1, "Back", (200, 400))
+        self.btn2 = wx.Button(self, -1, "Next", (300, 400))
 
 
 class third_panel(wx.Panel):
@@ -76,7 +78,8 @@ class third_panel(wx.Panel):
         self.SaturdayTimeStart = wx.ComboBox(self, pos=(100, 200), choices=timechoice, style=wx.CB_READONLY)
         self.SaturdayTimeEnd = wx.ComboBox(self, pos=(160, 200), choices=timechoice, style=wx.CB_READONLY)
 
-        self.btn = wx.Button(self, -1, "Next", (300, 400))
+        self.btn1 = wx.Button(self, -1, "Back", (200, 400))
+        self.btn2 = wx.Button(self, -1, "Next", (300, 400))
 
 class fourth_panel(wx.Panel):
 
@@ -96,7 +99,8 @@ class fourth_panel(wx.Panel):
         self.grid1.SetCellValue(0,0, "Lesson")
         self.grid1.SetCellValue(0,1, "Date")
 
-        self.btn = wx.Button(self, -1, "Next", (300, 400))
+        self.btn1 = wx.Button(self, -1, "Back", (200, 400))
+        self.btn2 = wx.Button(self, -1, "Next", (300, 400))
 
 class MyTarget(wx.TextDropTarget):
     def __init__(self, object):
@@ -123,7 +127,8 @@ class fifth_panel(wx.Panel):
         self.btn2 = wx.Button(self, -1, "<<", (200, 200)) 
         self.box2 = wx.ListBox(self, -1, (300,75), (150,250), style = wx.LB_SINGLE)
 
-        self.btn = wx.Button(self, -1, "Next", (300, 400))
+        self.btn3 = wx.Button(self, -1, "Back", (200, 400))
+        self.btn4 = wx.Button(self, -1, "Next", (300, 400))
 
 class sixth_panel(wx.Panel):
     
@@ -143,7 +148,8 @@ class sixth_panel(wx.Panel):
         self.grid1.SetCellValue(0,0, "Lesson")
         self.grid1.SetCellValue(0,1, "Hours of Preparation")
 
-        self.btn = wx.Button(self, -1, "Next", (300, 400))
+        self.btn1 = wx.Button(self, -1, "Back", (200, 400))
+        self.btn2 = wx.Button(self, -1, "Next", (300, 400))
 
 class seventh_panel(wx.Panel):
 
@@ -175,8 +181,9 @@ class seventh_panel(wx.Panel):
         self.grid1.SetColSize(1, 125)
         self.grid1.SetColSize(2, 125)
 
-        self.btn1 = wx.Button(self, -1, "Next", (300, 400))
-        self.btn2 = wx.Button(self, -1, "Save Preset", (400,400))
+        self.btn1 = wx.Button(self, -1, "Back", (200, 400))
+        self.btn2 = wx.Button(self, -1, "Next", (300, 400))
+        self.btn3 = wx.Button(self, -1, "Save Preset", (400,400))
 
 class eighth_panel(wx.Panel):
 
@@ -197,7 +204,8 @@ class eighth_panel(wx.Panel):
         self.rb21 = wx.RadioButton(self, label="each 1 hour",pos=(20, 125), style=wx.RB_GROUP)
         self.rb22 = wx.RadioButton(self, label="each 30 minute(more detail)",pos=(150, 125))
 
-        self.btn1 = wx.Button(self, -1, "Create Agenda", (300, 400))
+        self.btn1 = wx.Button(self, -1, "Back", (200, 400))
+        self.btn2 = wx.Button(self, -1, "Create Agenda", (300, 400))
 
 class PresetDialog(wx.Dialog):
 
@@ -232,6 +240,30 @@ class PresetDialog(wx.Dialog):
         self.chose = "Pre3"
         self.Destroy()
 
+class ResultDialog(wx.Dialog):
+
+    def __init__(self, *args, **kw):
+        super(ResultDialog, self).__init__(*args, **kw)
+
+        self.initUI()
+        self.SetSize(550,150)
+        self.SetTitle("The Schedule has been made")
+    
+    def initUI(self):
+
+        pnl = wx.Panel(self)
+        text31 = 'Your Schedule has been Generated'
+        text32 = 'Your Schedule already saved as an excel file and placed inside the same folder'
+        font2 = wx.Font(10, wx.DEFAULT, wx.NORMAL, wx.NORMAL)
+        wx.StaticText(self, -1, text31, (20, 10)).SetFont(font2)
+        wx.StaticText(self, -1, text32, (20, 40)).SetFont(font2)
+        self.set1 = wx.Button(self, -1, "Exit", (150,70))
+
+        self.set1.Bind(wx.EVT_BUTTON, self.exitProg)
+
+    def exitProg(self, event):
+        self.Destroy()
+
 class Program(wx.Frame):
 
     def __init__(self):
@@ -250,37 +282,79 @@ class Program(wx.Frame):
         self.panel_one.btn1.Bind(wx.EVT_BUTTON, self.show_panel_two)
         self.panel_one.btn2.Bind(wx.EVT_BUTTON, self.show_load_dialog)
         sizer.Add(self.panel_two, 1, wx.EXPAND)
-        self.panel_two.btn.Bind(wx.EVT_BUTTON, self.show_panel_three)
+        self.panel_two.btn1.Bind(wx.EVT_BUTTON, self.prev_panel_two)
+        self.panel_two.btn2.Bind(wx.EVT_BUTTON, self.show_panel_three)
         self.panel_two.Hide()
         self.panel_three = third_panel(self)
         sizer.Add(self.panel_three, 1, wx.EXPAND)
-        self.panel_three.btn.Bind(wx.EVT_BUTTON, self.show_panel_four)
+        self.panel_three.btn1.Bind(wx.EVT_BUTTON, self.prev_panel_three)
+        self.panel_three.btn2.Bind(wx.EVT_BUTTON, self.show_panel_four)
         self.panel_three.Hide()
         self.panel_four = fourth_panel(self)
         sizer.Add(self.panel_four, 1, wx.EXPAND)
-        self.panel_four.btn.Bind(wx.EVT_BUTTON, self.show_panel_five)
+        self.panel_four.btn1.Bind(wx.EVT_BUTTON, self.prev_panel_four)
+        self.panel_four.btn2.Bind(wx.EVT_BUTTON, self.show_panel_five)
         self.panel_four.Hide()
         self.panel_five = fifth_panel(self)
         sizer.Add(self.panel_five, 1, wx.EXPAND)
-        self.panel_five.btn.Bind(wx.EVT_BUTTON, self.show_panel_six)
-        self.panel_five.btn1.Bind(wx.EVT_BUTTON, self.bring_to_next)
-        self.panel_five.btn2.Bind(wx.EVT_BUTTON, self.bring_back)
+        self.panel_five.btn1.Bind(wx.EVT_BUTTON, self.prev_panel_five)
+        self.panel_five.btn2.Bind(wx.EVT_BUTTON, self.show_panel_six)
+        self.panel_five.btn3.Bind(wx.EVT_BUTTON, self.bring_to_next)
+        self.panel_five.btn4.Bind(wx.EVT_BUTTON, self.bring_back)
         self.panel_five.Hide()
         self.panel_six = sixth_panel(self)
         sizer.Add(self.panel_six, 1, wx.EXPAND)
-        self.panel_six.btn.Bind(wx.EVT_BUTTON, self.show_panel_seven)
+        self.panel_six.btn1.Bind(wx.EVT_BUTTON, self.prev_panel_six)
+        self.panel_six.btn2.Bind(wx.EVT_BUTTON, self.show_panel_seven)
         self.panel_six.Hide()
         self.panel_seven = seventh_panel(self)
         sizer.Add(self.panel_seven, 1, wx.EXPAND)
-        self.panel_seven.btn1.Bind(wx.EVT_BUTTON, self.show_panel_eight)
-        self.panel_seven.btn2.Bind(wx.EVT_BUTTON, self.show_save_dialog)
+        self.panel_seven.btn1.Bind(wx.EVT_BUTTON, self.prev_panel_seven)
+        self.panel_seven.btn2.Bind(wx.EVT_BUTTON, self.show_panel_eight)
+        self.panel_seven.btn3.Bind(wx.EVT_BUTTON, self.show_save_dialog)
         self.panel_seven.Hide()
         self.panel_eight = eighth_panel(self)
         sizer.Add(self.panel_eight, 1, wx.EXPAND)
-        self.panel_eight.btn1.Bind(wx.EVT_BUTTON, self.createagenda)
+        self.panel_eight.btn1.Bind(wx.EVT_BUTTON, self.prev_panel_eight)
+        self.panel_eight.btn2.Bind(wx.EVT_BUTTON, self.createagenda)
         self.panel_eight.Hide()
         self.SetSize((800, 480))
         self.Centre()
+    
+    def prev_panel_two(self, event):
+        self.panel_two.Hide()
+        self.panel_one.Show()
+        self.Layout()
+
+    def prev_panel_three(self, event):
+        self.panel_three.Hide()
+        self.panel_two.Show()
+        self.Layout()
+
+    def prev_panel_four(self, event):
+        self.panel_four.Show()
+        self.panel_three.Hide()
+        self.Layout()
+
+    def prev_panel_five(self, event):
+        self.panel_five.Show()
+        self.panel_four.Hide()
+        self.Layout()
+
+    def prev_panel_six(self, event):
+        self.panel_six.Show()
+        self.panel_five.Hide()
+        self.Layout()
+    
+    def prev_panel_seven(self, event):
+        self.panel_seven.Show()
+        self.panel_six.Hide()
+        self.Layout()
+
+    def prev_panel_eight(self, event):
+        self.panel_eight.Show()
+        self.panel_seven.Hide()
+        self.Layout()
 
     def show_panel_two(self, event):
         self.panel_two.Show()
@@ -434,6 +508,11 @@ class Program(wx.Frame):
             MakeHourlySchedule(STSinput,STEinput,MTSinput,MTEinput,TTSinput,TTEinput,WTSinput,WTEinput,ThTSinput,ThTEinput,FTSinput,FTEinput,SaTSinput,SaTEinput,Lessons)
         if(choice11 == True & choice22 == True):
             MakeDetailedSchedule(STSinput,STEinput,MTSinput,MTEinput,TTSinput,TTEinput,WTSinput,WTEinput,ThTSinput,ThTEinput,FTSinput,FTEinput,SaTSinput,SaTEinput,Lessons)
+        Rdialog = ResultDialog(None, title="The Schedule has been made")
+        Rdialog.ShowModal()
+        Rdialog.Destroy()
+        self.Close()
+        os.system('start Exam_Revision_Schedule.xlsx')
 
     def SavePreset(self, Presetname):
         Presetinp = {

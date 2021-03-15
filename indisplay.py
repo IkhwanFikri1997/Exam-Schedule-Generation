@@ -12,8 +12,8 @@ class first_panel(wx.Panel):
     def __init__(self, parent):
         wx.Panel.__init__(self, parent=parent)
 
-        text1 = 'Welcome to revision timetable generator'
-        text2 = 'This program will generate timetable based on the several questions that you will answered throughout this program'
+        text1 = 'Selamat Datang di revision timetable generator'
+        text2 = 'Program ini akan membuat jadwal berdasarkan pertanyaan yang kalian akan jawab dalam program ini'
         self.SetSize((800,480))
         
         font = wx.Font(10, wx.DEFAULT, wx.NORMAL, wx.NORMAL)
@@ -21,7 +21,7 @@ class first_panel(wx.Panel):
         wx.StaticText(self, -1, text2, (20,35)).SetFont(font)
 
         self.btn1 = wx.Button(self, -1, "Next", (200, 400))
-        self.btn2 = wx.Button(self, -1, "Load Preset", (300, 400))
+        self.btn2 = wx.Button(self, -1, "Tampilkan Preset ke dalam program", (300, 400))
 
 
 class second_panel(wx.Panel):
@@ -29,14 +29,18 @@ class second_panel(wx.Panel):
     def __init__(self, parent):
         wx.Panel.__init__(self, parent)
 
-        text11 = 'Sleep Time Confirmation'
+        text11 = 'Konfimasi Waktu Tidur'
         font = wx.Font(18, wx.DEFAULT, wx.NORMAL, wx.NORMAL)
-        wx.StaticText(self, -1, text11, (250, 10)).SetFont(font)
-        text12 = 'What time do you usually sleep?'
+        wx.StaticText(self, -1, text11, (200, 10)).SetFont(font)
+        text12 = 'Jam berapa biasanya anda tidur?'
         font2 = wx.Font(10, wx.DEFAULT, wx.NORMAL, wx.NORMAL)
         wx.StaticText(self, -1, text12, (20, 50)).SetFont(font2)
-        self.SleepTimeStart = wx.ComboBox(self, pos=(20, 75), choices=timechoice, style=wx.CB_READONLY)
-        self.SleepTimeEnd = wx.ComboBox(self, pos=(80, 75), choices=timechoice, style=wx.CB_READONLY)
+        text13 = 'Dari'
+        wx.StaticText(self, -1, text13, (20, 75)).SetFont(font2)
+        self.SleepTimeStart = wx.ComboBox(self, pos=(55, 75), choices=timechoice, style=wx.CB_READONLY)
+        text14 = 'Ke'
+        wx.StaticText(self, -1, text14, (120, 75)).SetFont(font2)
+        self.SleepTimeEnd = wx.ComboBox(self, pos=(150, 75), choices=timechoice, style=wx.CB_READONLY)
 
         self.btn1 = wx.Button(self, -1, "Back", (200, 400))
         self.btn2 = wx.Button(self, -1, "Next", (300, 400))
@@ -47,16 +51,18 @@ class third_panel(wx.Panel):
     def __init__(self, parent):
         wx.Panel.__init__(self, parent)
 
-        text21 = 'School Time Confirmation'
+        text21 = 'Konfirmasi Jam Kuliah'
         font1 = wx.Font(18, wx.DEFAULT, wx.NORMAL, wx.NORMAL)
-        wx.StaticText(self, -1, text21, (250, 10)).SetFont(font1)
-        text22 = 'What time do you usually go to school?'
-        text23 = 'Monday'
-        text24 = 'Tuesday'
-        text25 = 'Wednesday'
-        text26 = 'Thursday'
-        text27 = 'Friday'
-        text28 = 'Saturday'
+        wx.StaticText(self, -1, text21, (200, 10)).SetFont(font1)
+        text22 = 'Jam berapa anda biasanya kuliah?'
+        text23 = 'Senin'
+        text24 = 'Selasa'
+        text25 = 'Rabu'
+        text26 = 'Kamis'
+        text27 = 'Jumat'
+        text28 = 'Sabtu'
+        text29 = 'Dari'
+        text30 = 'Ke'
         font2 = wx.Font(10, wx.DEFAULT, wx.NORMAL, wx.NORMAL)
         wx.StaticText(self, -1, text22, (20, 50)).SetFont(font2)
         wx.StaticText(self, -1, text23, (20, 75)).SetFont(font2)
@@ -65,18 +71,30 @@ class third_panel(wx.Panel):
         wx.StaticText(self, -1, text26, (20, 150)).SetFont(font2)
         wx.StaticText(self, -1, text27, (20, 175)).SetFont(font2)
         wx.StaticText(self, -1, text28, (20, 200)).SetFont(font2)
-        self.MondayTimeStart = wx.ComboBox(self, pos=(100, 75), choices=timechoice, style=wx.CB_READONLY)
-        self.MondayTimeEnd = wx.ComboBox(self, pos=(160, 75), choices=timechoice, style=wx.CB_READONLY)
-        self.TuesdayTimeStart = wx.ComboBox(self, pos=(100, 100), choices=timechoice, style=wx.CB_READONLY)
-        self.TuesdayTimeEnd = wx.ComboBox(self, pos=(160, 100), choices=timechoice, style=wx.CB_READONLY)
-        self.WednesdayTimeStart = wx.ComboBox(self, pos=(100, 125), choices=timechoice, style=wx.CB_READONLY)
-        self.WednesdayTimeEnd = wx.ComboBox(self, pos=(160, 125), choices=timechoice, style=wx.CB_READONLY)
-        self.ThursdayTimeStart = wx.ComboBox(self, pos=(100, 150), choices=timechoice, style=wx.CB_READONLY)
-        self.ThursdayTimeEnd = wx.ComboBox(self, pos=(160, 150), choices=timechoice, style=wx.CB_READONLY)
-        self.FridayTimeStart = wx.ComboBox(self, pos=(100, 175), choices=timechoice, style=wx.CB_READONLY)
-        self.FridayTimeEnd = wx.ComboBox(self, pos=(160, 175), choices=timechoice, style=wx.CB_READONLY)
-        self.SaturdayTimeStart = wx.ComboBox(self, pos=(100, 200), choices=timechoice, style=wx.CB_READONLY)
-        self.SaturdayTimeEnd = wx.ComboBox(self, pos=(160, 200), choices=timechoice, style=wx.CB_READONLY)
+        wx.StaticText(self, -1, text29, (75, 75)).SetFont(font2)
+        wx.StaticText(self, -1, text30, (175, 75)).SetFont(font2)
+        wx.StaticText(self, -1, text29, (75, 100)).SetFont(font2)
+        wx.StaticText(self, -1, text30, (175, 100)).SetFont(font2)
+        wx.StaticText(self, -1, text29, (75, 125)).SetFont(font2)
+        wx.StaticText(self, -1, text30, (175, 125)).SetFont(font2)
+        wx.StaticText(self, -1, text29, (75, 150)).SetFont(font2)
+        wx.StaticText(self, -1, text30, (175, 150)).SetFont(font2)
+        wx.StaticText(self, -1, text29, (75, 175)).SetFont(font2)
+        wx.StaticText(self, -1, text30, (175, 175)).SetFont(font2)
+        wx.StaticText(self, -1, text29, (75, 200)).SetFont(font2)
+        wx.StaticText(self, -1, text30, (175, 200)).SetFont(font2)
+        self.MondayTimeStart = wx.ComboBox(self, pos=(110, 75), choices=timechoice, style=wx.CB_READONLY)
+        self.MondayTimeEnd = wx.ComboBox(self, pos=(200, 75), choices=timechoice, style=wx.CB_READONLY)
+        self.TuesdayTimeStart = wx.ComboBox(self, pos=(110, 100), choices=timechoice, style=wx.CB_READONLY)
+        self.TuesdayTimeEnd = wx.ComboBox(self, pos=(200, 100), choices=timechoice, style=wx.CB_READONLY)
+        self.WednesdayTimeStart = wx.ComboBox(self, pos=(110, 125), choices=timechoice, style=wx.CB_READONLY)
+        self.WednesdayTimeEnd = wx.ComboBox(self, pos=(200, 125), choices=timechoice, style=wx.CB_READONLY)
+        self.ThursdayTimeStart = wx.ComboBox(self, pos=(110, 150), choices=timechoice, style=wx.CB_READONLY)
+        self.ThursdayTimeEnd = wx.ComboBox(self, pos=(200, 150), choices=timechoice, style=wx.CB_READONLY)
+        self.FridayTimeStart = wx.ComboBox(self, pos=(110, 175), choices=timechoice, style=wx.CB_READONLY)
+        self.FridayTimeEnd = wx.ComboBox(self, pos=(200, 175), choices=timechoice, style=wx.CB_READONLY)
+        self.SaturdayTimeStart = wx.ComboBox(self, pos=(110, 200), choices=timechoice, style=wx.CB_READONLY)
+        self.SaturdayTimeEnd = wx.ComboBox(self, pos=(200, 200), choices=timechoice, style=wx.CB_READONLY)
 
         self.btn1 = wx.Button(self, -1, "Back", (200, 400))
         self.btn2 = wx.Button(self, -1, "Next", (300, 400))
@@ -86,18 +104,18 @@ class fourth_panel(wx.Panel):
     def __init__(self, parent):
         wx.Panel.__init__(self, parent)
 
-        text5 = "Input Schedule"
+        text5 = "Pemasukan Jadwal"
         font1 = font1 = wx.Font(18, wx.DEFAULT, wx.NORMAL, wx.NORMAL)
-        wx.StaticText(self, -1, text5, (275, 10)).SetFont(font1)
-        text51 = "include your exam schedule here!"
+        wx.StaticText(self, -1, text5, (250, 10)).SetFont(font1)
+        text51 = "Masukkan Jadwal Ujian Anda di sini!"
         font2 = wx.Font(10, wx.DEFAULT, wx.NORMAL, wx.NORMAL)
         wx.StaticText(self, -1, text51, (20, 50)).SetFont(font2)
         self.grid1 = grid.Grid(self, -1, (20,75), (325,250))
         self.grid1.CreateGrid(26,2)
         self.grid1.SetColSize(0, 100)
         self.grid1.SetColSize(1, 125)
-        self.grid1.SetCellValue(0,0, "Lesson")
-        self.grid1.SetCellValue(0,1, "Date")
+        self.grid1.SetCellValue(0,0, "Mata Kuliah")
+        self.grid1.SetCellValue(0,1, "Tanggal")
 
         self.btn1 = wx.Button(self, -1, "Back", (200, 400))
         self.btn2 = wx.Button(self, -1, "Next", (300, 400))
@@ -116,10 +134,10 @@ class fifth_panel(wx.Panel):
     def __init__(self, parent):
         wx.Panel.__init__(self, parent)
 
-        text6 = "Exam Prioritization"
+        text6 = "Prioritas Ujian"
         font1 = font1 = wx.Font(18, wx.DEFAULT, wx.NORMAL, wx.NORMAL)
-        wx.StaticText(self, -1, text6, (225, 10)).SetFont(font1)
-        text61 = "please drag each lesson from this list to the new ones depending on how important it is"
+        wx.StaticText(self, -1, text6, (200, 10)).SetFont(font1)
+        text61 = "Mohon seret mata kuliah dari list ini ke list yang baru berdasarkan seberapa pentingnya ujian mata kuliah tersebut."
         font2 = wx.Font(10, wx.DEFAULT, wx.NORMAL, wx.NORMAL)
         wx.StaticText(self, -1, text61, (20, 50)).SetFont(font2)
         self.box1 = wx.ListBox(self, -1, (20,75), (150,250), style = wx.LB_SINGLE)
@@ -135,18 +153,18 @@ class sixth_panel(wx.Panel):
     def __init__(self, parent):
         wx.Panel.__init__(self, parent)
 
-        text7 = "Preparation hours estimation"
+        text7 = "Estimasi Jam Persiapan"
         font1 = font1 = wx.Font(18, wx.DEFAULT, wx.NORMAL, wx.NORMAL)
-        wx.StaticText(self, -1, text7, (250, 10)).SetFont(font1)
-        text71 = "how long could you prepare these exams?"
+        wx.StaticText(self, -1, text7, (225, 10)).SetFont(font1)
+        text71 = "Berapa Jam kalian bisa mempersiapkan ujian ini?"
         font2 = wx.Font(10, wx.DEFAULT, wx.NORMAL, wx.NORMAL)
         wx.StaticText(self, -1, text71, (20, 50)).SetFont(font2)
         self.grid1 = grid.Grid(self, -1, (20,75), (325,250))
         self.grid1.CreateGrid(26,2)
         self.grid1.SetColSize(0, 100)
         self.grid1.SetColSize(1, 125)
-        self.grid1.SetCellValue(0,0, "Lesson")
-        self.grid1.SetCellValue(0,1, "Hours of Preparation")
+        self.grid1.SetCellValue(0,0, "Mata Kuliah")
+        self.grid1.SetCellValue(0,1, "Jam untuk Persiapan")
 
         self.btn1 = wx.Button(self, -1, "Back", (200, 400))
         self.btn2 = wx.Button(self, -1, "Next", (300, 400))
@@ -156,9 +174,9 @@ class seventh_panel(wx.Panel):
     def __init__(self, parent):
         wx.Panel.__init__(self, parent)
 
-        text4 = 'Input Confirmation'
+        text4 = 'Konfirmasi input'
         font1 = font1 = wx.Font(18, wx.DEFAULT, wx.NORMAL, wx.NORMAL)
-        wx.StaticText(self, -1, text4, (275, 10)).SetFont(font1)        
+        wx.StaticText(self, -1, text4, (250, 10)).SetFont(font1)        
         font2 = wx.Font(10, wx.DEFAULT, wx.NORMAL, wx.NORMAL)
         text41="test"
         self.st1 = wx.StaticText(self, -1, label=text41, pos=(10, 50))
@@ -175,7 +193,7 @@ class seventh_panel(wx.Panel):
         self.st6.SetFont(font2)
         self.st7 = wx.StaticText(self, -1, label=text41, pos=(10, 200))
         self.st7.SetFont(font2)
-        self.grid1 = grid.Grid(self, -1, (325,50), (375,300))
+        self.grid1 = grid.Grid(self, -1, (350,50), (325,300))
         self.grid1.CreateGrid(26,3)
         self.grid1.SetColSize(0, 100)
         self.grid1.SetColSize(1, 125)
@@ -183,29 +201,29 @@ class seventh_panel(wx.Panel):
 
         self.btn1 = wx.Button(self, -1, "Back", (200, 400))
         self.btn2 = wx.Button(self, -1, "Next", (300, 400))
-        self.btn3 = wx.Button(self, -1, "Save Preset", (400,400))
+        self.btn3 = wx.Button(self, -1, "Simpan input Ke dalam Preset", (400,400))
 
 class eighth_panel(wx.Panel):
 
     def __init__(self, parent):
         wx.Panel.__init__(self, parent)
         
-        text3 = 'Schedule Generation'
+        text3 = 'Pembuatan Jadwal'
         font1 = wx.Font(18, wx.DEFAULT, wx.NORMAL, wx.NORMAL)
-        wx.StaticText(self, -1, text3, (295, 10)).SetFont(font1)
-        text31 = 'which schedule do you want to generate?'
+        wx.StaticText(self, -1, text3, (250, 10)).SetFont(font1)
+        text31 = 'Tipe Jadwal mana yang mau kalian bikin'
         font2 = wx.Font(10, wx.DEFAULT, wx.NORMAL, wx.NORMAL)
         font3 = wx.Font(9, wx.DEFAULT, wx.NORMAL, wx.NORMAL)
         wx.StaticText(self, -1, text31, (20, 50)).SetFont(font2)
-        self.rb11 = wx.RadioButton(self, label="weekly",pos=(20, 75), style=wx.RB_GROUP)
-        self.rb12 = wx.RadioButton(self, label="fixed (with date)",pos=(150, 75))
-        text34 = 'which views do you want to choose?'
+        self.rb11 = wx.RadioButton(self, label="Mingguan",pos=(20, 75), style=wx.RB_GROUP)
+        self.rb12 = wx.RadioButton(self, label="Dengan Tanggal",pos=(100, 75))
+        text34 = 'Tipe Tampilan mana yang kalian pilih'
         wx.StaticText(self, -1, text34, (20, 100)).SetFont(font2)
-        self.rb21 = wx.RadioButton(self, label="each 1 hour",pos=(20, 125), style=wx.RB_GROUP)
-        self.rb22 = wx.RadioButton(self, label="each 30 minute(more detail)",pos=(150, 125))
+        self.rb21 = wx.RadioButton(self, label="setiap jam",pos=(20, 125), style=wx.RB_GROUP)
+        self.rb22 = wx.RadioButton(self, label="setiap 30 menit (Lebih detail)",pos=(100, 125))
 
         self.btn1 = wx.Button(self, -1, "Back", (200, 400))
-        self.btn2 = wx.Button(self, -1, "Create Agenda", (300, 400))
+        self.btn2 = wx.Button(self, -1, "Bikin Jadwal", (300, 400))
 
 class PresetDialog(wx.Dialog):
 
@@ -214,7 +232,7 @@ class PresetDialog(wx.Dialog):
 
         self.InitUI()
         self.SetSize(400,150)
-        self.SetTitle("Choose Preset")
+        self.SetTitle("Pilih Preset")
         self.chose = ""
 
     def InitUI(self):
@@ -247,13 +265,13 @@ class ResultDialog(wx.Dialog):
 
         self.initUI()
         self.SetSize(550,150)
-        self.SetTitle("The Schedule has been made")
+        self.SetTitle("Jadwal anda telah dibuat")
     
     def initUI(self):
 
         pnl = wx.Panel(self)
-        text31 = 'Your Schedule has been Generated'
-        text32 = 'Your Schedule already saved as an excel file and placed inside the same folder'
+        text31 = 'Jadwal anda sudah dibuat'
+        text32 = 'Jadwal anda telah disimpan sebagai file excel dan ditaruh di dalam folder yang sama'
         font2 = wx.Font(10, wx.DEFAULT, wx.NORMAL, wx.NORMAL)
         wx.StaticText(self, -1, text31, (20, 10)).SetFont(font2)
         wx.StaticText(self, -1, text32, (20, 40)).SetFont(font2)
@@ -297,10 +315,10 @@ class Program(wx.Frame):
         self.panel_four.Hide()
         self.panel_five = fifth_panel(self)
         sizer.Add(self.panel_five, 1, wx.EXPAND)
-        self.panel_five.btn1.Bind(wx.EVT_BUTTON, self.prev_panel_five)
-        self.panel_five.btn2.Bind(wx.EVT_BUTTON, self.show_panel_six)
-        self.panel_five.btn3.Bind(wx.EVT_BUTTON, self.bring_to_next)
-        self.panel_five.btn4.Bind(wx.EVT_BUTTON, self.bring_back)
+        self.panel_five.btn3.Bind(wx.EVT_BUTTON, self.prev_panel_five)
+        self.panel_five.btn4.Bind(wx.EVT_BUTTON, self.show_panel_six)
+        self.panel_five.btn1.Bind(wx.EVT_BUTTON, self.bring_to_next)
+        self.panel_five.btn2.Bind(wx.EVT_BUTTON, self.bring_back)
         self.panel_five.Hide()
         self.panel_six = sixth_panel(self)
         sizer.Add(self.panel_six, 1, wx.EXPAND)
@@ -332,28 +350,28 @@ class Program(wx.Frame):
         self.Layout()
 
     def prev_panel_four(self, event):
-        self.panel_four.Show()
-        self.panel_three.Hide()
+        self.panel_four.Hide()
+        self.panel_three.Show()
         self.Layout()
 
     def prev_panel_five(self, event):
-        self.panel_five.Show()
-        self.panel_four.Hide()
+        self.panel_five.Hide()
+        self.panel_four.Show()
         self.Layout()
 
     def prev_panel_six(self, event):
-        self.panel_six.Show()
-        self.panel_five.Hide()
+        self.panel_six.Hide()
+        self.panel_five.Show()
         self.Layout()
     
     def prev_panel_seven(self, event):
-        self.panel_seven.Show()
-        self.panel_six.Hide()
+        self.panel_seven.Hide()
+        self.panel_six.Show()
         self.Layout()
 
     def prev_panel_eight(self, event):
-        self.panel_eight.Show()
-        self.panel_seven.Hide()
+        self.panel_eight.Hide()
+        self.panel_seven.Show()
         self.Layout()
 
     def show_panel_two(self, event):
@@ -406,23 +424,23 @@ class Program(wx.Frame):
         FTEstr = self.panel_three.FridayTimeEnd.GetStringSelection()
         SaTSstr = self.panel_three.SaturdayTimeStart.GetStringSelection()
         SaTEstr = self.panel_three.SaturdayTimeEnd.GetStringSelection()
-        output1 = "You are sleeping from "+ str(STSstr) +" to "+ str(STEstr)
+        output1 = "Anda tidur dari jam "+ str(STSstr) +" sampai jam "+ str(STEstr)
         self.panel_seven.st1.SetLabel(output1)
-        output2 = "In monday, you have a school from "+ str(MTSstr) +" to "+ str(MTEstr)
+        output2 = "Hari Senin, anda kuliah dari jam "+ str(MTSstr) +" sampai jam "+ str(MTEstr)
         self.panel_seven.st2.SetLabel(output2)
-        output3 = "In tuesday, you have a school from "+ str(TTSstr) +" to "+ str(TTEstr)
+        output3 = "Hari Selasa, anda kuliah dari jam "+ str(TTSstr) +" sampai jam "+ str(TTEstr)
         self.panel_seven.st3.SetLabel(output3)
-        output4 = "In wednesday, you have a school from "+ str(WTSstr) +" to "+ str(WTEstr)
+        output4 = "Hari Rabu, anda kuliah dari jam "+ str(WTSstr) +" sampai jam "+ str(WTEstr)
         self.panel_seven.st4.SetLabel(output4)
-        output5 = "In thursday, you have a school from "+ str(ThTSstr) +" to "+ str(ThTEstr)
+        output5 = "Hari Kamis, anda kuliah dari jam "+ str(ThTSstr) +" sampai jam "+ str(ThTEstr)
         self.panel_seven.st5.SetLabel(output5)
-        output6 = "In friday, you have a school from "+ str(FTSstr) +" to "+ str(FTEstr)
+        output6 = "Hari Jumat, anda kuliah dari jam "+ str(FTSstr) +" sampai jam "+ str(FTEstr)
         self.panel_seven.st6.SetLabel(output6)
-        output7 = "In saturday, you have a school from "+ str(SaTSstr) +" to "+ str(SaTEstr)
+        output7 = "Hari Sabtu, anda kuliah dari jam "+ str(SaTSstr) +" sampai jam "+ str(SaTEstr)
         self.panel_seven.st7.SetLabel(output7)
-        self.panel_seven.grid1.SetCellValue(0,0, "Lesson")
-        self.panel_seven.grid1.SetCellValue(0,1, "Date")
-        self.panel_seven.grid1.SetCellValue(0,2, "Hours of Estimation")
+        self.panel_seven.grid1.SetCellValue(0,0, "Mata Kuliah")
+        self.panel_seven.grid1.SetCellValue(0,1, "Tanggal")
+        self.panel_seven.grid1.SetCellValue(0,2, "Jam untuk Persiapan")
         listLessons = []
         for i in range (1,26):
             listLessons.append(self.panel_four.grid1.GetCellValue(i,0))
@@ -458,7 +476,7 @@ class Program(wx.Frame):
     
     def show_save_dialog(self,event):
         save_dialog = PresetDialog(None, title="Choose the preset that you want to save")
-        save_dialog.SetTitle("Choose the preset that you want to save")
+        save_dialog.SetTitle("Pilih Preset mana yang anda mau simpan dengan input ini")
         save_dialog.ShowModal()
         if (save_dialog.chose == "Pre1"):
             Program.SavePreset(self, "Preset1")
@@ -563,19 +581,19 @@ class Program(wx.Frame):
         with open(str(Presetname)+'.json') as json_file:
             datas = json.load(json_file)
             print(datas)
-            output1 = "You are sleeping from "+ str(datas['stssr']) +" to "+ str(datas['stesr'])
+            output1 = "You are sleeping from "+ str(datas['stssr']) +" sampai jam "+ str(datas['stesr'])
             self.panel_seven.st1.SetLabel(output1)
-            output2 = "In monday, you have a school from "+ str(datas['mtssr']) +" to "+ str(datas['mtesr'])
+            output2 = "In monday, you have a school from "+ str(datas['mtssr']) +" sampai jam "+ str(datas['mtesr'])
             self.panel_seven.st2.SetLabel(output2)
-            output3 = "In tuesday, you have a school from "+ str(datas['ttssr']) +" to "+ str(datas['ttesr'])
+            output3 = "In tuesday, you have a school from "+ str(datas['ttssr']) +" sampai jam "+ str(datas['ttesr'])
             self.panel_seven.st3.SetLabel(output3)
-            output4 = "In wednesday, you have a school from "+ str(datas['wtssr']) +" to "+ str(datas['wtesr'])
+            output4 = "In wednesday, you have a school from "+ str(datas['wtssr']) +" sampai jam "+ str(datas['wtesr'])
             self.panel_seven.st4.SetLabel(output4)
-            output5 = "In thursday, you have a school from "+ str(datas['thtssr']) +" to "+ str(datas['thtesr'])
+            output5 = "In thursday, you have a school from "+ str(datas['thtssr']) +" sampai jam "+ str(datas['thtesr'])
             self.panel_seven.st5.SetLabel(output5)
-            output6 = "In friday, you have a school from "+ str(datas['ftssr']) +" to "+ str(datas['ftesr'])
+            output6 = "In friday, you have a school from "+ str(datas['ftssr']) +" sampai jam "+ str(datas['ftesr'])
             self.panel_seven.st6.SetLabel(output6)
-            output7 = "In saturday, you have a school from "+ str(datas['satssr']) +" to "+ str(datas['satesr'])
+            output7 = "In saturday, you have a school from "+ str(datas['satssr']) +" sampai jam "+ str(datas['satesr'])
             self.panel_seven.st7.SetLabel(output7)
             self.panel_two.SleepTimeStart.SetSelection(datas['stsinp'])
             self.panel_two.SleepTimeEnd.SetSelection(datas['steinp'])
@@ -604,7 +622,7 @@ class Program(wx.Frame):
 
     def show_load_dialog(self,event):
         load_dialog = PresetDialog(None, title="Choose the preset that you want to load")
-        load_dialog.SetTitle("Choose the preset that you want to load")
+        load_dialog.SetTitle("Pilih preset mana yang mau tampilkan dalam program ini")
         load_dialog.ShowModal()
         if (load_dialog.chose == "Pre1"):
             Program.LoadPreset(self, "Preset1")

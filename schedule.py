@@ -6,7 +6,7 @@ isfilled = {}
 
 color = ['black', 'blue', 'brown', 'cyan', 'green', 'lime', 'magenta', 'navy', 'orange', 'pink', 'purple', 'silver', 'white', 'yellow']
 
-workbook = xlsxwriter.Workbook('Exam Revision Schedule.xlsx')
+workbook = xlsxwriter.Workbook('Exam_Revision_Schedule.xlsx')
 worksheet =  workbook.add_worksheet()
 
 Bold = workbook.add_format({'bold': True})
